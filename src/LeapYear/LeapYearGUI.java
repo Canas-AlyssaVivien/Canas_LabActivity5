@@ -33,11 +33,16 @@ public class LeapYearGUI extends JFrame {
     }
 
     public void year_checker() {
-        if((year_entered() % 4 == 0) && (year_entered() % 100 != 0) || (year_entered() % 400 == 0)) {
-            JOptionPane.showMessageDialog(null,"Leap year");
-            tfYear.setText("");
-        } else {
-            JOptionPane.showMessageDialog(null, "Not a leap year");
+        try {
+            if ((year_entered() % 4 == 0) && (year_entered() % 100 != 0) || (year_entered() % 400 == 0)) {
+                JOptionPane.showMessageDialog(null, "Leap year");
+                tfYear.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Not a leap year");
+                tfYear.setText("");
+            }
+        } catch (NumberFormatException a) {
+            JOptionPane.showMessageDialog(null, "Input must be a number.");
             tfYear.setText("");
         }
     }
