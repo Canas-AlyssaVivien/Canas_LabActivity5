@@ -1,7 +1,5 @@
 package SimpleCalc;
 
-import LeapYear.LeapYearGUI;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +10,7 @@ public class SimpleCalcGUI extends JFrame {
     private JTextField tfNumber1;
     private JComboBox cbOperations;
     private JButton btnCompute;
-    private JTextField tfNumber;
+    private JTextField tfNumber2;
     private JTextField lblResult;
 
     public SimpleCalcGUI(){
@@ -33,23 +31,30 @@ public class SimpleCalcGUI extends JFrame {
         app.setVisible(true);
     }
 
-    public int tfNumber_entered() {
-        return Integer.parseInt(tfNumber.getText());
+    public double tfNumber1_entered() {
+        return Double.parseDouble(tfNumber1.getText());
     }
 
-    public int tfNumber1_entered() {
-        return Integer.parseInt(tfNumber1.getText());
+    public double tfNumber2_entered() {
+        return Double.parseDouble(tfNumber2.getText());
     }
 
     public void result() {
-        if(Objects.equals(cbOperations.getSelectedItem(), "+")) {
-            lblResult.setText(Integer.toString(tfNumber_entered() + tfNumber1_entered()));
-        } else if(Objects.equals(cbOperations.getSelectedItem(), "-")) {
-            lblResult.setText(Integer.toString(tfNumber_entered() - tfNumber1_entered()));
-        } else if(Objects.equals(cbOperations.getSelectedItem(), "*")) {
-            lblResult.setText(Integer.toString(tfNumber_entered() * tfNumber1_entered()));
-        } else if(Objects.equals(cbOperations.getSelectedItem(), "/")) {
-            lblResult.setText(Integer.toString(tfNumber1_entered() / tfNumber_entered()));
+        try {
+            if(Objects.equals(cbOperations.getSelectedItem(), "+")) {
+                lblResult.setText(Double.toString(tfNumber1_entered() + tfNumber2_entered()));
+            } else if(Objects.equals(cbOperations.getSelectedItem(), "-")) {
+                lblResult.setText(Double.toString(tfNumber1_entered() - tfNumber2_entered()));
+            } else if(Objects.equals(cbOperations.getSelectedItem(), "*")) {
+                lblResult.setText(Double.toString(tfNumber1_entered() * tfNumber2_entered()));
+            } else if(Objects.equals(cbOperations.getSelectedItem(), "/")) {
+                lblResult.setText(Double.toString(tfNumber1_entered() / tfNumber2_entered()));
+            }
+        } catch (NumberFormatException a) {
+            JOptionPane.showMessageDialog(null, "Input must be a number.");
+            tfNumber1.setText("");
+            tfNumber2.setText("");
         }
+
     }
 }
